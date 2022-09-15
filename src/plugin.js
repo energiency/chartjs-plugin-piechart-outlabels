@@ -48,8 +48,8 @@ export default {
       }
 
       outlabelPlugin.update(el, elements, index);
-      const x = outlabelPlugin.labelRect.x + (!outlabelPlugin.labelRect.isLeft ? 0 : outlabelPlugin.labelRect.width);
-      const y = outlabelPlugin.labelRect.y + (outlabelPlugin.labelRect.isTop ? 0 : outlabelPlugin.labelRect.height);
+      const x = outlabelPlugin.labelRect.x - (!outlabelPlugin.labelRect.isLeft ? 0 : outlabelPlugin.labelRect.width);
+      const y = outlabelPlugin.labelRect.y - (outlabelPlugin.labelRect.isTop ? 0 : outlabelPlugin.labelRect.height);
       if (x < rect.x1) {
         rect.x1 = x;
       }
@@ -71,7 +71,8 @@ export default {
       rect.x2 - chart.chartArea.right,
       rect.y2 - chart.chartArea.bottom
     ];
-    const diff = Math.max(...maxDeltas.filter(x => x > 0), 0);
+    let diff = Math.max(...maxDeltas.filter(x => x > 0));
+    diff = Math.abs(diff) === Infinity ? 0 : diff;
     const percent = diff * 100 / ctrl.outerRadius;
     ctrl.outerRadius -= percent < max ? diff : max * 100 / ctrl.outerRadius;
     ctrl.innerRadius = ctrl.outerRadius / 2;
