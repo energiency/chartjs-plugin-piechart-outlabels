@@ -149,7 +149,7 @@ export default {
 	 * @member {Number}
 	 * @default 50 (%)
 	 */
-  maxZoomOutPercentage: 50,
+  maxZoomOutPercentage: 60,
 
   /**
 	 * The count of numbers after the point separator for float values of percent property
