@@ -75,7 +75,6 @@ export default {
       this.lines = lines;
       this.label = label;
       this.value = value;
-      this.ctx = ctx;
 
       // Init style
       this.style = {
@@ -171,7 +170,7 @@ export default {
 
     /* ======================= DRAWING ======================= */
     // Draw label text
-    this.drawText = function () {
+    this.drawText = function (ctx) {
       var align = this.style.textAlign;
       var font = this.style.font;
       var lh = font.lineHeight;
@@ -192,19 +191,49 @@ export default {
         x += this.textRect.width;
       }
 
-      this.ctx.font = this.style.font.string;
-      this.ctx.fillStyle = color;
-      this.ctx.textAlign = align;
-      this.ctx.textBaseline = "middle";
+      ctx.font = this.style.font.string;
+      ctx.fillStyle = color;
+      ctx.textAlign = align;
+      ctx.textBaseline = "middle";
 
       for (idx = 0; idx < ilen; ++idx) {
-        this.ctx.fillText(
+        ctx.fillText(
           this.lines[idx],
           Math.round(x) + this.style.padding.left,
           Math.round(y),
           Math.round(this.textRect.width)
         );
         y += lh;
+      }
+    };
+
+    // Draw label box
+    this.drawLabel = function (ctx) {
+      ctx.beginPath();
+
+      console.log(this.labelRect);
+
+      ctx.roundRect(
+        Math.round(this.labelRect.x),
+        Math.round(this.labelRect.y),
+        Math.round(this.labelRect.width),
+        Math.round(this.labelRect.height),
+        this.style.borderRadius
+      );
+      ctx.closePath();
+
+      console.log(this.style.backgroundColor);
+
+      if (this.style.backgroundColor) {
+        ctx.fillStyle = this.style.backgroundColor || "transparent";
+        ctx.fill();
+      }
+
+      if (this.style.borderColor && this.style.borderWidth) {
+        ctx.strokeStyle = this.style.borderColor;
+        ctx.lineWidth = this.style.borderWidth;
+        ctx.lineJoin = "miter";
+        ctx.stroke();
       }
     };
 
@@ -219,22 +248,22 @@ export default {
       );
     };
 
-    this.drawLine = function () {
+    this.drawLine = function (ctx) {
       if (!this.lines.length) {
         return;
       }
-      this.ctx.save();
+      ctx.save();
 
-      this.ctx.strokeStyle = this.style.lineColor;
-      this.ctx.lineWidth = this.style.lineWidth;
-      this.ctx.lineJoin = "miter";
-      this.ctx.beginPath();
-      this.ctx.moveTo(this.center.anchor.x, this.center.anchor.y);
-      this.ctx.lineTo(this.center.copy.x, this.center.copy.y);
-      this.ctx.stroke();
+      ctx.strokeStyle = this.style.lineColor;
+      ctx.lineWidth = this.style.lineWidth;
+      ctx.lineJoin = "miter";
+      ctx.beginPath();
+      ctx.moveTo(this.center.anchor.x, this.center.anchor.y);
+      ctx.lineTo(this.center.copy.x, this.center.copy.y);
+      ctx.stroke();
 
-      this.ctx.beginPath();
-      this.ctx.moveTo(this.center.copy.x, this.center.copy.y);
+      ctx.beginPath();
+      ctx.moveTo(this.center.copy.x, this.center.copy.y);
       const xOffset = this.textRect.width + this.style.padding.width;
       const intersect = this.intersects(
         this.textRect,
@@ -248,18 +277,19 @@ export default {
           y: this.textRect.y + this.textRect.height / 2,
         }
       );
-      this.ctx.lineTo(
+      ctx.lineTo(
         this.textRect.x + (intersect ? xOffset : 0),
         this.textRect.y + this.textRect.height / 2
       );
-      this.ctx.stroke();
-      this.ctx.restore();
+      ctx.stroke();
+      ctx.restore();
     };
 
-    this.draw = function () {
+    this.draw = function (ctx) {
       if (chart.getDataVisibility(index)) {
-        this.drawText();
-        this.drawLine();
+        this.drawLabel(ctx);
+        this.drawText(ctx);
+        this.drawLine(ctx);
       }
     };
 

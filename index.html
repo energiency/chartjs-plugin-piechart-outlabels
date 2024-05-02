@@ -39,7 +39,8 @@
 								Adapt
 							</label>
 						</span>
-						<input class="form-control jscolor" value="FFFFFF" onchange="changeParam('borderColor', '#' + this.value)" id="borderColor">
+						<input class="form-control jscolor" value="FFFFFF" onchange="changeParam('borderColor', this.value)" id="borderColor">
+						<button class="form-control" onclick="clearColor('borderColor')">Clear</button>
 					</div>
 
 					<div class="input-group">
@@ -60,15 +61,16 @@
 						<label class="input-group-addon" for="lineColor">Background</label>
 						<span class="input-group-addon">
 							<label class="form-check-label">
-								<input type="checkbox" class="form-check-input" checked name="lineColor" onchange="changeParam('backgroundColor', undefined)" value="left" id="backgroundColorCheckbox"/>
+								<input type="checkbox" class="form-check-input" checked name="backgroundColor" onchange="changeParam('backgroundColor', undefined)" value="left" id="backgroundColorCheckbox"/>
 								Adapt
 							</label>
 						</span>
-						<input class="form-control jscolor" value="transparent" onchange="changeParam('backgroundColor', '#' + this.value)" id="backgroundColor">
+						<input class="form-control jscolor" value="transparent" onchange="changeParam('backgroundColor', this.value)" id="backgroundColor">
+						<button class="form-control" onclick="clearColor('backgroundColor')">Clear</button>
 					</div>
 					<div class="input-group">
 						<span class="input-group-addon">Color</span>
-						<input class="form-control jscolor" value="FFFFFF" onchange="changeParam('color', '#' + this.value)">
+						<input class="form-control jscolor" value="FFFFFF" onchange="changeParam('color', this.value)">
 					</div>
 					<div class="input-group">
 						<label class="input-group-addon" for="lineColor">Align</label>
@@ -110,7 +112,8 @@
 								Adapt
 							</label>
 						</span>
-						<input class="form-control jscolor" value="000000" onchange="changeParam('lineColor', '#' + this.value)" id="lineColor">
+						<input class="form-control jscolor" value="000000" onchange="changeParam('lineColor', this.value)" id="lineColor">
+						<button class="form-control" onclick="clearColor('lineColor')">Clear</button>
 					</div>
 					<div class="input-group">
 						<label class="input-group-addon">Width</label>
@@ -312,8 +315,13 @@
 			chart.update();
 		}
 
+		function clearColor(p) {
+			$('#' + p).val('transparent');
+			changeParam(p, 'transparent');
+		}
+
 		function changeParam(p, value) {
-			var arr = [
+			const arr = [
 				'lineColor',
 				'backgroundColor',
 				'borderColor'
@@ -321,11 +329,11 @@
 
 			if(~arr.indexOf(p)) {
 				if(value) {
-					$('#' + p + 'Checkbox').prop('checked', false);;
+					$('#' + p + 'Checkbox').prop('checked', false);
 				}
 
 				if(!$('#' + p + 'Checkbox').is(':checked')) {
-					value = '#' + $('#' + p).val();
+					value = $('#' + p).val();
 				}
 			}
 
