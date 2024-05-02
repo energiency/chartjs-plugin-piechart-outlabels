@@ -14,11 +14,11 @@ Requires [Chart.js](https://github.com/chartjs/Chart.js/releases) **3.0.0** or l
 
 ## Documentation
 
-- [Installation](https://piechart-outlabels.netlify.com/installation)
-- [Quick Start](https://piechart-outlabels.netlify.com/quickstart)
-- [Options](https://piechart-outlabels.netlify.com/options)
-- [Formating & Styling](https://piechart-outlabels.netlify.com/formatting)
-- [Sample](https://piechart-outlabels.netlify.com/sample)
+- [Installation](https://piechart-outlabels.netlify.app/installation)
+- [Quick Start](https://piechart-outlabels.netlify.app/quickstart)
+- [Options](https://piechart-outlabels.netlify.app/options)
+- [Formating & Styling](https://piechart-outlabels.netlify.app/formatting)
+- [Sample](https://piechart-outlabels.netlify.app/sample)
 
 ## Development
 
