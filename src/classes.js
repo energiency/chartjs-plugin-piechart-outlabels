@@ -211,8 +211,6 @@ export default {
     this.drawLabel = function (ctx) {
       ctx.beginPath();
 
-      console.log(this.labelRect);
-
       ctx.roundRect(
         Math.round(this.labelRect.x),
         Math.round(this.labelRect.y),
@@ -221,8 +219,6 @@ export default {
         this.style.borderRadius
       );
       ctx.closePath();
-
-      console.log(this.style.backgroundColor);
 
       if (this.style.backgroundColor) {
         ctx.fillStyle = this.style.backgroundColor || "transparent";
