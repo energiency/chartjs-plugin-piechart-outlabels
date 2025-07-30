@@ -58,7 +58,7 @@ function parseFont(value, width, height) {
         family: valueOrDefault(value.family, Chart.defaults.defaultFontFamily),
         lineHeight: toLineHeight(value.lineHeight, size),
         lineWidth: toLineWidth(value.lineWidth, size),
-        size: size,
+        size,
         style: valueOrDefault(value.style, Chart.defaults.defaultFontStyle),
         weight: valueOrDefault(value.weight, null),
         string: '',

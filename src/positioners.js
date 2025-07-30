@@ -13,14 +13,8 @@ export default {
             y: arc.y + sinA * stretchedD,
             d: stretchedD,
             arc: arc,
-            anchor: {
-                x: arc.x + cosA * d,
-                y: arc.y + sinA * d,
-            },
-            copy: {
-                x: arc.x + cosA * stretchedD,
-                y: arc.y + sinA * stretchedD,
-            },
+            anchor: { x: arc.x + cosA * d, y: arc.y + sinA * d },
+            copy: { x: arc.x + cosA * stretchedD, y: arc.y + sinA * stretchedD },
         };
     },
 

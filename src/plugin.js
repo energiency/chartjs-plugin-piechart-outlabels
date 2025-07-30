@@ -29,12 +29,7 @@ function configure(dataset, options) {
  * @returns Bounding box
  */
 function getBoundingBox(elements) {
-    const rect = {
-        left: Infinity,
-        right: -Infinity,
-        top: Infinity,
-        bottom: -Infinity,
-    };
+    const rect = { left: Infinity, right: -Infinity, top: Infinity, bottom: -Infinity };
 
     for (let i = 0, l = elements.length; i < l; i++) {
         const outlabel = elements[i][PLUGIN_KEY];
