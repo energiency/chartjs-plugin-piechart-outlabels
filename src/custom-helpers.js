@@ -1,7 +1,7 @@
 'use strict';
 
 import { Chart } from 'chart.js';
-import { valueOrDefault, isNullOrUndef, toLineHeight, toLineWidth } from 'chart.js/helpers';
+import { valueOrDefault, isNullOrUndef, toLineHeight } from 'chart.js/helpers';
 
 function toFontString(font) {
     if (!font || isNullOrUndef(font.size) || isNullOrUndef(font.family)) {
@@ -57,7 +57,7 @@ function parseFont(value, width, height) {
     var font = {
         family: valueOrDefault(value.family, Chart.defaults.defaultFontFamily),
         lineHeight: toLineHeight(value.lineHeight, size),
-        lineWidth: toLineWidth(value.lineWidth, size),
+        lineWidth: toLineHeight(value.lineWidth, size),
         size,
         style: valueOrDefault(value.style, Chart.defaults.defaultFontStyle),
         weight: valueOrDefault(value.weight, null),
