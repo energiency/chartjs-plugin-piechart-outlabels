@@ -34,7 +34,7 @@ function textSize(ctx, lines, font) {
     };
 }
 
-function adaptTextSizeToHeight(width, height, minimum, maximum) {
+function adaptTextSizeToDimensions(width, height, minimum, maximum) {
     const diag = Math.sqrt(Math.pow(width || 100, 2) + Math.pow(height || 100, 2));
     const size = Math.round(diag * 0.02);
 
@@ -51,7 +51,7 @@ function parseFont(value, width, height) {
     var size = valueOrDefault(value.size, Chart.defaults.defaultFontSize);
 
     if (value.resizable) {
-        size = adaptTextSizeToHeight(width, height, value.minSize, value.maxSize);
+        size = adaptTextSizeToDimensions(width, height, value.minSize, value.maxSize);
     }
 
     var font = {
