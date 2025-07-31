@@ -1,7 +1,7 @@
-extends: chartjs
+extends: ["chartjs", "plugin:prettier/recommended"]
 
 parserOptions:
-  ecmaVersion: 8
+  ecmaVersion: 13
   sourceType: module
 
 env:
